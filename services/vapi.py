@@ -17,4 +17,4 @@ def create_vapi_agent(data):
     try:    
         return response.json(), response.status_code
     except ValueError:
-        return {
+        return {"error": "Invalid response from VAPI API"}, 500
