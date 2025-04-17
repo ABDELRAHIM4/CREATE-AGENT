@@ -13,8 +13,8 @@ def create_retell_agent(data):
         "voice_id" : data['voice_id'],
         "instructions": data['instructions']
     }
-    try:
-        response = requests.post(url, headers=headers, json=payload)
-        return jsonify(response.json())
-   except ValueError:
+    response = requests.post(url, headers=headers, json=payload)
+    try:    
+        return response.json(), response.status_code
+    except ValueError:
         return {"error": "Invalid response from Retell API"}, 500
