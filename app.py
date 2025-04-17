@@ -12,14 +12,10 @@ load_dotenv()
 @app.route('/create-agent', methods=['POST'])
 def create_agent():
     data = request.get_json()
-    print(data)  # Log the incoming data for debugging
     provider = data.get('provider')
-    print(provider)  # Log the provider for debugging
     if provider == 'vapi':
         try:
             response, status_code = create_vapi_agent(data)
-            print(response)  # Log the response for debugging
-            print("Response status code:", status_code)  # Log the status code
             return jsonify(response), status_code
         except requests.exceptions.RequestException as e:
             return {'error': str(e)}, 500
